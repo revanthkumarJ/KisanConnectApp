@@ -4,12 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
@@ -42,6 +46,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import com.example.kisanconnect.core.utilities.imageBase
+import com.example.kisanconnect.features.Screens.About.presentation.AboutUI
+import com.example.kisanconnect.features.Screens.Home.data.CarouselItemUI
+import com.example.kisanconnect.features.Screens.Home.data.HomeScreenProductCardItemUI
+import com.example.kisanconnect.features.Screens.Home.presentation.ui.CarouselRow
+import com.example.kisanconnect.features.Screens.Home.presentation.ui.HomeScreen
+import com.example.kisanconnect.features.Screens.Home.presentation.ui.HomeScreenProductRow
 import com.example.kisanconnect.ui.theme.KisanConnectTheme
 import kotlinx.coroutines.launch
 
@@ -134,17 +145,11 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                         ) { innerPadding ->
-                            LazyColumn(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .padding(innerPadding)
-                            ) {
-                                items(100) {
-                                    Text(
-                                        text = it.toString(),
-                                        modifier = Modifier.padding(16.dp)
-                                    )
-                                }
+
+
+                            Box(modifier = Modifier.padding(innerPadding)){
+//                                HomeScreen()
+                                AboutUI()
                             }
                         }
                     }
