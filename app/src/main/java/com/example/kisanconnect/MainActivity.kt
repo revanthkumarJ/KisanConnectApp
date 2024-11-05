@@ -46,13 +46,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.example.kisanconnect.core.utilities.imageBase
-import com.example.kisanconnect.features.Screens.About.presentation.AboutUI
-import com.example.kisanconnect.features.Screens.Home.data.CarouselItemUI
-import com.example.kisanconnect.features.Screens.Home.data.HomeScreenProductCardItemUI
-import com.example.kisanconnect.features.Screens.Home.presentation.ui.CarouselRow
 import com.example.kisanconnect.features.Screens.Home.presentation.ui.HomeScreen
-import com.example.kisanconnect.features.Screens.Home.presentation.ui.HomeScreenProductRow
 import com.example.kisanconnect.ui.theme.KisanConnectTheme
 import kotlinx.coroutines.launch
 
@@ -148,8 +142,8 @@ class MainActivity : ComponentActivity() {
 
 
                             Box(modifier = Modifier.padding(innerPadding)){
-//                                HomeScreen()
-                                AboutUI()
+                                HomeScreen()
+//                                AboutUI()
                             }
                         }
                     }

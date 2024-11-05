@@ -7,6 +7,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.kisanconnect.core.utilities.imageBase
+import com.example.kisanconnect.features.Screens.About.presentation.AboutUI
 import com.example.kisanconnect.features.Screens.Home.data.CarouselItemUI
 import com.example.kisanconnect.features.Screens.Home.data.HomeScreenProductCardItemUI
 
@@ -44,6 +45,7 @@ fun HomeScreen()
         HomeScreenProductRow("Grains",list = items)
         HomeScreenProductRow("Dairy",list = items)
         HomeScreenProductRow("Others",list = items)
+        AboutUI()
 
     }
 }

@@ -2,8 +2,6 @@ package com.example.kisanconnect.core.utilities
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
-
-
 // Utility function to decode Base64 string into ImageBitmap
 // Function to decode Base64 to Bitmap
 fun decodeBase64ToBitmap(base64String: String): Bitmap? {

@@ -6,5 +6,6 @@ data class AboutUserProfileItem(
     var instagram:String,
     var linkdeIn:String,
     var github:String,
-    var facebook:String
+    var facebook:String,
+    val image:Int
 )

@@ -23,7 +23,6 @@ import com.example.kisanconnect.features.Screens.Home.presentation.componenets.H
 
 @Composable
 fun HomeScreenProductRow(type: String, list: List<HomeScreenProductCardItemUI>) {
-
         Column(
             modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp, horizontal = 4.dp) // Add padding inside the card
         ) {
@@ -42,6 +41,5 @@ fun HomeScreenProductRow(type: String, list: List<HomeScreenProductCardItemUI>) 
                 }
             }
         }
-
 }
 

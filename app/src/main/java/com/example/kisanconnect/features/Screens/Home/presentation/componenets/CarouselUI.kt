@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -32,6 +33,7 @@ import com.example.kisanconnect.ui.theme.KisanConnectTheme
 @Composable
 fun CarouselUI(carouselItemUI: CarouselItemUI) {
     val bitmap = decodeBase64ToBitmap(carouselItemUI.image)
+    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
 
     Card(
         modifier = Modifier.width(350.dp).height(200.dp),
@@ -44,7 +46,7 @@ fun CarouselUI(carouselItemUI: CarouselItemUI) {
                     painter = BitmapPainter(bitmap.asImageBitmap()),
                     contentDescription = carouselItemUI.title,
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.width(screenWidth)
                 )
             }
             Box(modifier = Modifier.fillMaxSize()
