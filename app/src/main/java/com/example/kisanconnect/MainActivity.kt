@@ -102,20 +102,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                     ) { innerPadding ->
-                        NavHost(
-                            navController = navController,
-                            startDestination = "home",
-                            enterTransition = {
-                                slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left) + fadeIn()
-                            },
-                            exitTransition = {
-                                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right) + fadeOut()
-                            },
-                            modifier = Modifier.padding(innerPadding)
-                        ) {
-                            composable("home") { HomeScreen() }
-                            composable("about") { AboutUI() }
-                        }
+                            NavHostGraph(navController = navController, modifier =Modifier.padding(innerPadding))
                     }
                 }
             }

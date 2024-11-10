@@ -12,12 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.kisanconnect.features.Screens.Home.data.model.HomeScreenProductCardItemUI
 import com.example.kisanconnect.features.Screens.Home.presentation.componenets.HomeScreenProductCardUI
 
 
 @Composable
-fun HomeScreenProductRow(type: String, list: List<HomeScreenProductCardItemUI>) {
+fun HomeScreenProductRow(navHostController: NavHostController,type: String, list: List<HomeScreenProductCardItemUI>) {
         Column(
             modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp, horizontal = 4.dp) // Add padding inside the card
         ) {
@@ -32,7 +33,7 @@ fun HomeScreenProductRow(type: String, list: List<HomeScreenProductCardItemUI>) 
                 modifier = Modifier.fillMaxWidth()
             ) {
                 items(list) { item ->
-                    HomeScreenProductCardUI(item = item)
+                    HomeScreenProductCardUI(item = item, navController = navHostController)
                 }
             }
         }

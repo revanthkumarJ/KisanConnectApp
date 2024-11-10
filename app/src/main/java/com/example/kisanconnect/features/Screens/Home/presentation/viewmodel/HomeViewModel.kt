@@ -56,6 +56,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+
     private fun getAllProductRows() {
         viewModelScope.launch {
             try {

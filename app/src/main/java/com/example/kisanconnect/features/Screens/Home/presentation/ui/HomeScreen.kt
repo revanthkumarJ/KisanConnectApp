@@ -11,11 +11,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.example.kisanconnect.core.ui.ProgressIndicator
 import com.example.kisanconnect.features.Screens.Home.presentation.viewmodel.HomeViewModel
 
 @Composable
-fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
+fun HomeScreen(modifier: Modifier,navController: NavHostController,homeViewModel: HomeViewModel = hiltViewModel()) {
     val carousels by homeViewModel.carousels
     val fruits by homeViewModel.fruits
     val vegetables by homeViewModel.vegetables
@@ -24,7 +25,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
     val others by homeViewModel.others
     val loadingState by homeViewModel.isLoading
 
-    Column(modifier = Modifier
+    Column(modifier = modifier
         .fillMaxSize()
         .verticalScroll(rememberScrollState())
     ) {
@@ -39,35 +40,35 @@ fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
         if (loadingState.isFruitsLoading) {
             ProgressIndicator()
         } else {
-            HomeScreenProductRow("Fruits", list = fruits)
+            HomeScreenProductRow(navController,"Fruits", list = fruits)
         }
 
         // Vegetables Row
         if (loadingState.isVegetablesLoading) {
             ProgressIndicator()
         } else {
-            HomeScreenProductRow("Vegetables", list = vegetables)
+            HomeScreenProductRow(navController,"Vegetables", list = vegetables)
         }
 
         // Grains Row
         if (loadingState.isGrainsLoading) {
             ProgressIndicator()
         } else {
-            HomeScreenProductRow("Grains", list = grains)
+            HomeScreenProductRow(navController,"Grains", list = grains)
         }
 
         // Dairy Row
         if (loadingState.isDairyLoading) {
             ProgressIndicator()
         } else {
-            HomeScreenProductRow("Dairy", list = dairy)
+            HomeScreenProductRow(navController,"Dairy", list = dairy)
         }
 
         // Others Row
         if (loadingState.isOthersLoading) {
             ProgressIndicator()
         } else {
-            HomeScreenProductRow("Others", list = others)
+            HomeScreenProductRow(navController,"Others", list = others)
         }
     }
 }

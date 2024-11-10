@@ -1,5 +1,6 @@
 package com.example.kisanconnect.features.Screens.Home.presentation.componenets
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,17 +23,21 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.kisanconnect.core.utilities.decodeBase64ToBitmap
 import com.example.kisanconnect.core.utilities.imageBase
 import com.example.kisanconnect.features.Screens.Home.data.model.HomeScreenProductCardItemUI
 import com.example.kisanconnect.ui.theme.KisanConnectTheme
 
 @Composable
-fun HomeScreenProductCardUI(item: HomeScreenProductCardItemUI) {
+fun HomeScreenProductCardUI(navController: NavHostController,item: HomeScreenProductCardItemUI) {
     val bitmap = decodeBase64ToBitmap(item.image)
 
     Card(
-        onClick = {},
+        onClick = {
+            navController.navigate("productPage/${item._id}")
+        },
         elevation = CardDefaults.cardElevation(3.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface // Use the surface color from the MaterialTheme
@@ -87,7 +92,8 @@ var item= HomeScreenProductCardItemUI(
     productName = "Apple",
     price = 20,
     unit = "kg",
-    image = imageBase()
+    image = imageBase(),
+    _id = "nsjbsjjsj"
 )
 
 
@@ -97,6 +103,6 @@ var item= HomeScreenProductCardItemUI(
 fun HomeScreenProductCardItemUIPreview()
 {
     KisanConnectTheme {
-        HomeScreenProductCardUI(item =item )
+        HomeScreenProductCardUI(item =item , navController = rememberNavController())
     }
 }

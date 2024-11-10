@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,12 +46,14 @@ val items=(1..3).map {
 
 
 @Composable
-fun AboutUI()
+fun AboutUI(modifier: Modifier)
 {
-    Column(modifier = Modifier
+    Column(modifier = modifier
         .fillMaxSize()
         .padding(5.dp)
-        .background(MaterialTheme.colorScheme.background)) {
+        .background(MaterialTheme.colorScheme.background)
+        .verticalScroll(rememberScrollState())
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -95,7 +99,9 @@ fun AboutUI()
         Spacer(modifier = Modifier.height(10.dp))
 
         LazyRow(
-            modifier = Modifier.fillMaxWidth().padding(start = 5.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 5.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
 
         ) {
@@ -115,6 +121,6 @@ fun AboutUI()
 fun AboutUIPreview()
 {
     KisanConnectTheme {
-        AboutUI()
+        AboutUI(modifier = Modifier)
     }
 }
