@@ -1,4 +1,4 @@
-package com.example.kisanconnect.features.Screens.Home.data
+package com.example.kisanconnect.features.Screens.Home.data.model
 
 data class HomeScreenProductCardItemUI(
     var productName:String,

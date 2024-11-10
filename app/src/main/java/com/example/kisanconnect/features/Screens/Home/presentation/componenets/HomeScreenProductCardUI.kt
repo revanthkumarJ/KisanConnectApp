@@ -1,7 +1,6 @@
 package com.example.kisanconnect.features.Screens.Home.presentation.componenets
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,20 +14,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kisanconnect.core.utilities.decodeBase64ToBitmap
 import com.example.kisanconnect.core.utilities.imageBase
-import com.example.kisanconnect.features.Screens.Home.data.HomeScreenProductCardItemUI
+import com.example.kisanconnect.features.Screens.Home.data.model.HomeScreenProductCardItemUI
 import com.example.kisanconnect.ui.theme.KisanConnectTheme
 
 @Composable
@@ -85,7 +80,7 @@ fun HomeScreenProductCardUI(item: HomeScreenProductCardItemUI) {
     }
 }
 
-var item=HomeScreenProductCardItemUI(
+var item= HomeScreenProductCardItemUI(
     productName = "Apple",
     price = 20,
     unit = "kg",
