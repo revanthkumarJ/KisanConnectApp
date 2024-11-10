@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -59,21 +60,23 @@ fun HomeScreenProductCardUI(item: HomeScreenProductCardItemUI) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(5.dp)
-                    .align(Alignment.CenterHorizontally) // Center align the content
+                    .align(Alignment.CenterHorizontally)
             ) {
                 Text(
                     text = item.productName,
                     fontSize = 12.sp,
-                    color = MaterialTheme.colorScheme.onSurface, // Text color from the MaterialTheme
-                    fontWeight = FontWeight.Bold, // Make text bold
-                    modifier = Modifier.align(Alignment.CenterHorizontally) // Center the product name
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
                 )
                 Text(
                     text = "${item.price}/${item.unit}",
                     fontSize = 10.sp,
-                    color = MaterialTheme.colorScheme.onSurface, // Text color from the MaterialTheme
-                    fontWeight = FontWeight.Bold, // Make price bold
-                    modifier = Modifier.align(Alignment.CenterHorizontally) // Center the price
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
             }
         }
