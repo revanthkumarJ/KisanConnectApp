@@ -5,7 +5,8 @@ import com.example.kisanconnect.features.Screens.Home.data.model.HomeScreenProdu
 import retrofit2.http.GET
 
 
-interface ApiService {
+interface HomeApiService {
+
     @GET("customer/getAllCarousels")
     suspend fun getAllCarousels(): List<CarouselItemUI>
 

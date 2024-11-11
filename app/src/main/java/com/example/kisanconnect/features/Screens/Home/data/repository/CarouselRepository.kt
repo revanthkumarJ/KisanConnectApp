@@ -1,72 +1,82 @@
 package com.example.kisanconnect.features.Screens.Home.data.repository
 
-
-
-import android.util.Log
 import com.example.kisanconnect.features.Screens.Home.data.model.CarouselItemUI
 import com.example.kisanconnect.features.Screens.Home.data.model.HomeScreenProductCardItemUI
-import com.example.kisanconnect.features.Screens.Home.data.remote.ApiService
+import com.example.kisanconnect.features.Screens.Home.data.remote.HomeApiService
 import javax.inject.Inject
+import java.io.IOException
 
-class CarouselRepository @Inject constructor(private val apiService: ApiService) {
+class CarouselRepository @Inject constructor(private val apiService: HomeApiService) {
 
     // Fetch carousels with error handling
-    suspend fun getAllCarousels(): List<CarouselItemUI> {
+    suspend fun getAllCarousels(): Result<List<CarouselItemUI>> {
         return try {
             val response = apiService.getAllCarousels()
-            response
+            Result.success(response)
+        } catch (e: IOException) {
+            Result.failure(e)  // Handle network issues
         } catch (e: Exception) {
-            emptyList()
+            Result.failure(e)  // Handle other exceptions
         }
     }
 
     // Fetch all fruits with error handling
-    suspend fun getAllFruits(): List<HomeScreenProductCardItemUI> {
+    suspend fun getAllFruits(): Result<List<HomeScreenProductCardItemUI>> {
         return try {
             val response = apiService.getAllFruits()
-            response
+            Result.success(response)
+        } catch (e: IOException) {
+            Result.failure(e)
         } catch (e: Exception) {
-            emptyList()
+            Result.failure(e)
         }
     }
 
     // Fetch all vegetables with error handling
-    suspend fun getAllVegetables(): List<HomeScreenProductCardItemUI> {
+    suspend fun getAllVegetables(): Result<List<HomeScreenProductCardItemUI>> {
         return try {
             val response = apiService.getAllVegetables()
-            response
+            Result.success(response)
+        } catch (e: IOException) {
+            Result.failure(e)
         } catch (e: Exception) {
-            emptyList()
+            Result.failure(e)
         }
     }
 
-    // Fetch all dairy with error handling
-    suspend fun getAllDairy(): List<HomeScreenProductCardItemUI> {
+    // Fetch all dairy products with error handling
+    suspend fun getAllDairy(): Result<List<HomeScreenProductCardItemUI>> {
         return try {
             val response = apiService.getAllDairy()
-            response
+            Result.success(response)
+        } catch (e: IOException) {
+            Result.failure(e)
         } catch (e: Exception) {
-            emptyList()
+            Result.failure(e)
         }
     }
 
-    // Fetch all  grains with error handling
-    suspend fun getAllGrains(): List<HomeScreenProductCardItemUI> {
+    // Fetch all grains with error handling
+    suspend fun getAllGrains(): Result<List<HomeScreenProductCardItemUI>> {
         return try {
             val response = apiService.getAllGrains()
-            response
+            Result.success(response)
+        } catch (e: IOException) {
+            Result.failure(e)
         } catch (e: Exception) {
-            emptyList()
+            Result.failure(e)
         }
     }
 
     // Fetch all other products with error handling
-    suspend fun getAllOther(): List<HomeScreenProductCardItemUI> {
+    suspend fun getAllOther(): Result<List<HomeScreenProductCardItemUI>> {
         return try {
             val response = apiService.getAllOther()
-            response
+            Result.success(response)
+        } catch (e: IOException) {
+            Result.failure(e)
         } catch (e: Exception) {
-            emptyList()
+            Result.failure(e)
         }
     }
 }

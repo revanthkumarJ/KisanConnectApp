@@ -1,6 +1,5 @@
 package com.example.kisanconnect.features.Screens.Home.presentation.viewmodel
 
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,6 +9,7 @@ import com.example.kisanconnect.features.Screens.Home.data.repository.CarouselRe
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val carouselRepository: CarouselRepository
@@ -36,79 +36,87 @@ class HomeViewModel @Inject constructor(
     var isLoading = mutableStateOf(LoadingState())
         private set
 
+    var errorMessage = mutableStateOf<String?>(null)
+        private set
+
     init {
         getAllCarousels()
         getAllProductRows()
     }
 
-    // Function to fetch data
+    fun clearErrorMessage(){
+        errorMessage.value=null
+    }
+
+    // Function to fetch carousels with Result handling
     private fun getAllCarousels() {
         viewModelScope.launch {
-            try {
-                isLoading.value = isLoading.value.copy(isCarouselsLoading = true)
-                val result = carouselRepository.getAllCarousels()
-                carousels.value = result
-            } catch (exception: Exception) {
-                carousels.value = emptyList()
-            } finally {
-                isLoading.value = isLoading.value.copy(isCarouselsLoading = false)
-            }
+            isLoading.value = isLoading.value.copy(isCarouselsLoading = true)
+            errorMessage.value = null
+
+            val result = carouselRepository.getAllCarousels()
+            result.fold(
+                onSuccess = { carousels.value = it },
+                onFailure = { errorMessage.value = "Failed to load carousels: ${it.message}" }
+            )
+
+            isLoading.value = isLoading.value.copy(isCarouselsLoading = false)
         }
     }
 
-
+    // Function to fetch all product rows with Result handling
     private fun getAllProductRows() {
         viewModelScope.launch {
-            try {
-                isLoading.value = isLoading.value.copy(isFruitsLoading = true, isVegetablesLoading = true, isDairyLoading = true, isGrainsLoading = true, isOthersLoading = true)
+            isLoading.value = isLoading.value.copy(
+                isFruitsLoading = true, isVegetablesLoading = true,
+                isDairyLoading = true, isGrainsLoading = true, isOthersLoading = true
+            )
+            errorMessage.value = null
 
-                val fruitResult = carouselRepository.getAllFruits()
-                fruits.value = fruitResult
-                isLoading.value = isLoading.value.copy(
-                    isFruitsLoading = false,
-                )
+            // Fruits
+            val fruitResult = carouselRepository.getAllFruits()
+            fruitResult.fold(
+                onSuccess = { fruits.value = it },
+                onFailure = { errorMessage.value = "Failed to load fruits: ${it.message}" }
+            )
+            isLoading.value = isLoading.value.copy(isFruitsLoading = false)
 
-                val vegetablesResult = carouselRepository.getAllVegetables()
-                vegetables.value = vegetablesResult
-                isLoading.value = isLoading.value.copy(
-                    isVegetablesLoading = false,
-                )
+            // Vegetables
+            val vegetableResult = carouselRepository.getAllVegetables()
+            vegetableResult.fold(
+                onSuccess = { vegetables.value = it },
+                onFailure = { errorMessage.value = "Failed to load vegetables: ${it.message}" }
+            )
+            isLoading.value = isLoading.value.copy(isVegetablesLoading = false)
 
+            // Dairy
+            val dairyResult = carouselRepository.getAllDairy()
+            dairyResult.fold(
+                onSuccess = { dairy.value = it },
+                onFailure = { errorMessage.value = "Failed to load dairy products: ${it.message}" }
+            )
+            isLoading.value = isLoading.value.copy(isDairyLoading = false)
 
-                val dairyResult = carouselRepository.getAllDairy()
-                dairy.value = dairyResult
-                isLoading.value = isLoading.value.copy(
-                    isDairyLoading = false,
-                )
+            // Grains
+            val grainsResult = carouselRepository.getAllGrains()
+            grainsResult.fold(
+                onSuccess = { grains.value = it },
+                onFailure = { errorMessage.value = "Failed to load grains: ${it.message}" }
+            )
+            isLoading.value = isLoading.value.copy(isGrainsLoading = false)
 
-                val grainsResult = carouselRepository.getAllGrains()
-                grains.value = grainsResult
-                isLoading.value = isLoading.value.copy(
-                    isGrainsLoading = false,
-                )
-
-                val othersResult = carouselRepository.getAllOther()
-                others.value = othersResult
-                isLoading.value = isLoading.value.copy(
-                    isOthersLoading = false
-                )
-            } catch (exception: Exception) {
-                // handle error
-            } finally {
-                isLoading.value = isLoading.value.copy(
-                    isFruitsLoading = false,
-                    isVegetablesLoading = false,
-                    isDairyLoading = false,
-                    isGrainsLoading = false,
-                    isOthersLoading = false
-                )
-            }
+            // Other products
+            val othersResult = carouselRepository.getAllOther()
+            othersResult.fold(
+                onSuccess = { others.value = it },
+                onFailure = { errorMessage.value = "Failed to load other products: ${it.message}" }
+            )
+            isLoading.value = isLoading.value.copy(isOthersLoading = false)
         }
     }
 }
 
-
-
+// Data class for loading states
 data class LoadingState(
     val isCarouselsLoading: Boolean = false,
     val isFruitsLoading: Boolean = false,

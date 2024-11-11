@@ -1,6 +1,7 @@
-package com.example.kisanconnect.features.Screens.Product.data
+package com.example.kisanconnect.features.Screens.Product.data.model
 
 data class Product(
+    val _id:String,
     val productName:String,
     val category:String,
     val description:String,

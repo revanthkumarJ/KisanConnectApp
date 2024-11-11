@@ -1,7 +1,7 @@
 package com.example.kisanconnect.features.Screens.Product.presentation.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,16 +15,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kisanconnect.core.utilities.imageBase
-import com.example.kisanconnect.features.Screens.Product.data.Product
+import com.example.kisanconnect.features.Screens.Product.data.model.Product
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import com.example.kisanconnect.core.ui.IntegerRangeDropdown
 import com.example.kisanconnect.core.utilities.formatDateToReadableFormat
+import com.example.kisanconnect.ui.theme.KisanConnectTheme
 
 @Composable
-fun ProductsPageDes(product: Product) {
+fun ProductsPageDes(product: Product,
+                    onQuantityChange:(Int)->Unit
+                    ) {
+    Log.i("RevanthStock",product.stock.toString())
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -76,10 +81,20 @@ fun ProductsPageDes(product: Product) {
 
         Spacer(modifier = Modifier.height(8.dp)) // Add spacing between price and stock info
 
-        Text(
-            text = "Current Stock: ${product.stock}",
-            color = MaterialTheme.colorScheme.onSurface
-        )
+        if(product.stock>0)
+        {
+            Text(
+                text = "Current Stock: ${product.stock}",
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        }
+        else{
+            Text(
+                text = "Out Of Stock",
+                color = Color.Red
+            )
+        }
+        
         Text(
             text = "Delivery In ${product.deliveryTime}",
             color = MaterialTheme.colorScheme.onSurface
@@ -95,6 +110,8 @@ fun ProductsPageDes(product: Product) {
             text = "Expiry Date: ${formatDateToReadableFormat(product.expiryDate)}",
             color = MaterialTheme.colorScheme.onSurface
         )
+        Spacer(modifier = Modifier.height(10.dp))
+        IntegerRangeDropdown(initialText = "Choose Quantity", start =1 , end = product.stock, onItemSelected = onQuantityChange)
 
         Spacer(modifier = Modifier.height(12.dp)) // Add spacing before buttons
 
@@ -117,7 +134,8 @@ fun ProductsPageDes(product: Product) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 10.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF66BB6A)) // Light green
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF66BB6A)) ,
+            enabled = (product.stock>0)
         ) {
             Text(text = "Buy Now", color = Color.White)
         }
@@ -125,27 +143,32 @@ fun ProductsPageDes(product: Product) {
 }
 
 @Composable
-@Preview
+@PreviewLightDark
 fun ProductsPageDesPreview() {
-    ProductsPageDes(
-        product = Product(
-            productName = "Fresh Mangoes",
-            category = "Fruits",
-            description = """
+    KisanConnectTheme {
+        ProductsPageDes(
+            product = Product(
+                _id = "jjbjbjbb",
+                productName = "Fresh Mangoes",
+                category = "Fruits",
+                description = """
                 Organic and fresh mangoes directly from the farm. 
                 Rich in flavor and nutrients, ideal for making fresh juices, smoothies, or enjoying as is. 
                 Handpicked to ensure the best quality. 
                 These mangoes are grown using sustainable farming practices.
                 Available in various sizes.
             """.trimIndent(),
-            price = 200,
-            unit = "kg",
-            stock = 50,
-            image = imageBase(),
-            harvestDate = "2024-09-01T00:00:00.000Z",
-            expiryDate = "2024-09-15T00:00:00.000Z",
-            farmingMethod = "Organic",
-            deliveryTime = "2-3 days",
+                price = 200,
+                unit = "kg",
+                stock = 50,
+                image = imageBase(),
+                harvestDate = "2024-09-01T00:00:00.000Z",
+                expiryDate = "2024-09-15T00:00:00.000Z",
+                farmingMethod = "Organic",
+                deliveryTime = "2-3 days",
+            ),onQuantityChange = { quantity ->
+                println("Selected Quantity: $quantity")
+            }
         )
-    )
+    }
 }
