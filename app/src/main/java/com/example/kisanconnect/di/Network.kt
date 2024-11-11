@@ -1,6 +1,7 @@
 package com.example.kisanconnect.di
 
 
+import com.example.kisanconnect.features.Screens.Cart.data.remote.CartApiService
 import com.example.kisanconnect.features.Screens.Home.data.remote.HomeApiService
 import com.example.kisanconnect.features.Screens.Product.data.remote.ProductApiService
 import dagger.Module
@@ -33,5 +34,12 @@ object NetworkModule {
     @Provides
     fun provideProductApiService(retrofit: Retrofit): ProductApiService {
         return retrofit.create(ProductApiService::class.java)
+    }
+
+
+    // Provide ApiService instance for Products
+    @Provides
+    fun provideCartApiService(retrofit: Retrofit): CartApiService {
+        return retrofit.create(CartApiService::class.java)
     }
 }

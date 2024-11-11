@@ -18,9 +18,11 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -48,7 +50,8 @@ class MainActivity : ComponentActivity() {
                 val items = listOf(
                     NavigationItem("Home", Icons.Filled.Home, Icons.Outlined.Home),
                     NavigationItem("About", Icons.Filled.Info, Icons.Outlined.Info),
-                    NavigationItem("Profile", Icons.Filled.Person, Icons.Outlined.Person)
+                    NavigationItem("Profile", Icons.Filled.Person, Icons.Outlined.Person),
+                    NavigationItem(title="Cart",Icons.Filled.ShoppingCart,Icons.Outlined.ShoppingCart)
                 )
 
                 val scope = rememberCoroutineScope()
