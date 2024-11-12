@@ -33,9 +33,9 @@ fun NavHostGraph(navController: NavHostController,modifier: Modifier) {
             var productId = backStackEntry.arguments?.getString("productId")
             if(productId==null)
                 productId=""
-            ProductPage(productId = productId,modifier=modifier)
+            ProductPage(productId = productId,modifier=modifier,navController)
         }
 
-        composable("cart") { CartPage(modifier=modifier) }
+        composable("cart") { CartPage(modifier=modifier,navController) }
     }
 }

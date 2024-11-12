@@ -21,13 +21,16 @@ import com.example.kisanconnect.core.utilities.imageBase
 import com.example.kisanconnect.features.Screens.Product.data.model.Product
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.kisanconnect.core.ui.IntegerRangeDropdown
 import com.example.kisanconnect.core.utilities.formatDateToReadableFormat
+import com.example.kisanconnect.features.Screens.Product.data.remote.CartItemRequest
+import com.example.kisanconnect.features.Screens.Product.presentation.viewmodel.ProductViewModel
 import com.example.kisanconnect.ui.theme.KisanConnectTheme
 
 @Composable
 fun ProductsPageDes(product: Product,
-                    onQuantityChange:(Int)->Unit
+                    viewModel: ProductViewModel= hiltViewModel(),onQuantityChange:(Int)->Unit,onEditClick:(String)->Unit
                     ) {
     Log.i("RevanthStock",product.stock.toString())
     Column(
@@ -117,7 +120,7 @@ fun ProductsPageDes(product: Product,
 
         // Add to Cart button with light green background and white text
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { onEditClick(product._id)  },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 10.dp),
@@ -168,6 +171,8 @@ fun ProductsPageDesPreview() {
                 deliveryTime = "2-3 days",
             ),onQuantityChange = { quantity ->
                 println("Selected Quantity: $quantity")
+            }, onEditClick = {
+
             }
         )
     }

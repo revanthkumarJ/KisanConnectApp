@@ -1,5 +1,6 @@
 package com.example.kisanconnect.features.Screens.Cart.presentation.ui
 
+import CartPageItem
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,12 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.example.kisanconnect.features.Screens.Cart.data.model.cartItemUI
-import com.example.kisanconnect.features.Screens.Cart.presentation.components.CartPageItem
 import com.example.kisanconnect.features.Screens.Cart.presentation.viewmodel.CartViewModel
 
 @Composable
-fun CartPage(modifier: Modifier, viewModel: CartViewModel = hiltViewModel()) {
+fun CartPage(modifier: Modifier, navHostController: NavHostController,viewModel: CartViewModel = hiltViewModel()) {
     val items = viewModel.cartItems.value
     val isLoading = viewModel.isLoading.value
     val errorMessage = viewModel.errorMessage.value
@@ -56,7 +57,7 @@ fun CartPage(modifier: Modifier, viewModel: CartViewModel = hiltViewModel()) {
                 verticalArrangement = Arrangement.spacedBy(7.dp)
             ) {
                 items(items) { item ->
-                    CartPageItem(item = item)
+                    CartPageItem(item = item,navHostController)
                 }
             }
         }

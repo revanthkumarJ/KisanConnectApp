@@ -55,4 +55,25 @@ class CartRepository @Inject constructor(
         }
         return list
     }
+
+
+    suspend fun deleteCartItem(productId: String,header:String):Boolean {
+        try {
+            val response = cartApiService.deleteCartItem(productId,header)
+            Log.i("Revanth",response.toString())
+            if (response.isSuccessful) {
+                // Successfully deleted the item
+                println("Item deleted successfully")
+                return true
+            } else {
+                // Handle API error response
+                println("Failed to delete item. Error code: ${response.code()}")
+                return false
+            }
+        } catch (e: Exception) {
+            // Handle any exceptions, like network errors
+            println("Exception occurred: ${e.message}")
+            return false
+        }
+    }
 }

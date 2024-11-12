@@ -1,10 +1,8 @@
-package com.example.kisanconnect.features.Screens.Cart.presentation.components
-
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -16,33 +14,37 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.example.kisanconnect.R
 import com.example.kisanconnect.core.utilities.decodeBase64ToBitmap
-import com.example.kisanconnect.core.utilities.imageBase
 import com.example.kisanconnect.features.Screens.Cart.data.model.cartItemUI
-import com.example.kisanconnect.ui.theme.KisanConnectTheme
+import com.example.kisanconnect.features.Screens.Cart.presentation.viewmodel.CartViewModel
 
 @Composable
-fun CartPageItem(item: cartItemUI){
+fun CartPageItem(item: cartItemUI, navController:NavHostController,viewModel: CartViewModel = hiltViewModel()) {
+    val context = LocalContext.current
+    val deleteSuccess = viewModel.deleteResult // State to observe delete result
+
     Card(
+        onClick = {
+            navController.navigate("productPage/${item.productId}")
+        },
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primaryContainer)
     ) {
@@ -54,7 +56,7 @@ fun CartPageItem(item: cartItemUI){
         ) {
             // Product image and details
             Row(modifier = Modifier.fillMaxWidth()) {
-                var bitmap = decodeBase64ToBitmap(item.image)
+                val bitmap = decodeBase64ToBitmap(item.image)
                 if (bitmap != null) {
                     Image(
                         painter = BitmapPainter(bitmap.asImageBitmap()),
@@ -85,7 +87,7 @@ fun CartPageItem(item: cartItemUI){
                     Text(text = "${item.price} / ${item.unit}", style = MaterialTheme.typography.bodySmall)
                     Text(text = "Quantity Selected: ${item.quantity}", style = MaterialTheme.typography.bodySmall)
                     Text(text = "Stock: ${item.stock}", style = MaterialTheme.typography.bodySmall)
-                    Text(text = "Amount:${item.quantity*item.price}", style = MaterialTheme.typography.bodyLarge)
+                    Text(text = "Amount: ${item.quantity * item.price}", style = MaterialTheme.typography.bodyLarge)
                 }
             }
 
@@ -98,7 +100,9 @@ fun CartPageItem(item: cartItemUI){
             ) {
                 // Remove Button
                 Button(
-                    onClick = { /* Handle remove action */ },
+                    onClick = {
+                        viewModel.OnDelete(item.productId)
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.surfaceVariant
                     ),
@@ -134,22 +138,15 @@ fun CartPageItem(item: cartItemUI){
             }
         }
     }
-}
 
-@Composable
-@PreviewLightDark
-fun CartPagePreview() {
-    KisanConnectTheme {
-        CartPageItem(
-            item = cartItemUI(
-                productId = "123",
-                name = "Sample Product",
-                quantity = 3,
-                price = 150,
-                unit = "kg",
-                stock = 50,
-                image = imageBase() // Base64 encoded image string or empty string
-            )
-        )
+    LaunchedEffect(deleteSuccess.value) {
+        deleteSuccess.value?.let { isSuccess ->
+            if (isSuccess) {
+                Toast.makeText(context, "Item deleted successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Failed to delete item", Toast.LENGTH_SHORT).show()
+            }
+            viewModel.deleteResult.value = null // Reset after displaying the message
+        }
     }
 }
