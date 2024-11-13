@@ -14,11 +14,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Person
@@ -51,7 +53,8 @@ class MainActivity : ComponentActivity() {
                     NavigationItem("Home", Icons.Filled.Home, Icons.Outlined.Home),
                     NavigationItem("About", Icons.Filled.Info, Icons.Outlined.Info),
                     NavigationItem("Profile", Icons.Filled.Person, Icons.Outlined.Person),
-                    NavigationItem(title="Cart",Icons.Filled.ShoppingCart,Icons.Outlined.ShoppingCart)
+                    NavigationItem(title="Cart",Icons.Filled.ShoppingCart,Icons.Outlined.ShoppingCart),
+                    NavigationItem(title="BuyNow",Icons.Filled.Face,Icons.Outlined.Face)
                 )
 
                 val scope = rememberCoroutineScope()
@@ -104,6 +107,7 @@ class MainActivity : ComponentActivity() {
                                 )
                             )
                         }
+                        , containerColor = MaterialTheme.colorScheme.background
                     ) { innerPadding ->
                             NavHostGraph(navController = navController, modifier =Modifier.padding(innerPadding))
                     }

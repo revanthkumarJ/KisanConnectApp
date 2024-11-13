@@ -1,4 +1,5 @@
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.*
@@ -16,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.example.kisanconnect.R
 import com.example.kisanconnect.core.utilities.SocialMediaIcon
 import com.example.kisanconnect.features.Screens.About.data.AboutUserProfileItem
@@ -29,10 +31,11 @@ fun AboutUserCard(item: AboutUserProfileItem) {
     Card(
         modifier = Modifier
             .width(screenWidth * 0.95f) // 90% of screen width
+            .background(MaterialTheme.colorScheme.background)
             .padding(8.dp)
     ) {
         Column(
-            modifier = Modifier.padding(vertical = 20.dp, horizontal = 8.dp),
+            modifier = Modifier.background(MaterialTheme.colorScheme.secondaryContainer).padding(vertical = 20.dp, horizontal = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Profile Image
@@ -51,12 +54,13 @@ fun AboutUserCard(item: AboutUserProfileItem) {
                 text = item.name,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
                 modifier = Modifier.padding(vertical = 4.dp)
             )
             Text(
                 text = item.role,
                 fontSize = 15.sp,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.onSecondaryContainer
             )
 
             // Social Media Icons Row
@@ -97,7 +101,7 @@ fun AboutUserCard(item: AboutUserProfileItem) {
 
 // Preview of the AboutUserCard
 @Composable
-@Preview(showBackground = true)
+@PreviewLightDark
 fun AboutUserCardPreview() {
     val item = AboutUserProfileItem(
         name = "Revanth",

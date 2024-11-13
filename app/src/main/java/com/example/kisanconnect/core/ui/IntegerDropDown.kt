@@ -13,17 +13,18 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun IntegerRangeDropdown(
     initialText:String,
+    initialValue:Int,
     start: Int,
     end: Int,
     onItemSelected: (Int) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var selectedValue by remember { mutableStateOf<Int?>(null) }
+    var selectedValue by remember { mutableStateOf<Int>(initialValue) }
 
     Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp)) {
         // TextField with dropdown icon
         OutlinedTextField(
-            value = selectedValue?.toString() ?: "",
+            value = selectedValue.toString(),
             onValueChange = { /* TextField is read-only */ },
             modifier = Modifier
                 .fillMaxWidth()
@@ -68,7 +69,8 @@ fun IntegerRangeDropdownPreview() {
     IntegerRangeDropdown(
         initialText = "Choose Quantity",
         start = 1,
-        end = 10
+        end = 10,
+        initialValue = 1
     ) { selectedValue ->
         println("Selected integer: $selectedValue")
     }

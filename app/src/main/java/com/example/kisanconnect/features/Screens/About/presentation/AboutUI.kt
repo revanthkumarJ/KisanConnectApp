@@ -50,8 +50,8 @@ fun AboutUI(modifier: Modifier)
 {
     Column(modifier = modifier
         .fillMaxSize()
-        .padding(5.dp)
         .background(MaterialTheme.colorScheme.background)
+        .padding(5.dp)
         .verticalScroll(rememberScrollState())
     ) {
         Box(
@@ -63,7 +63,7 @@ fun AboutUI(modifier: Modifier)
         {
             Text(
                 text = "KisanConnect",
-                color = MaterialTheme.colorScheme.secondary,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontWeight = FontWeight.Bold,
                 fontSize = 25.sp,
                 fontStyle = FontStyle.Italic
@@ -71,28 +71,28 @@ fun AboutUI(modifier: Modifier)
         }
         Text(
             text ="Kisan Connect is a mobile application designed to empower farmers by providing them with a user-friendly platform to access essential services, information, and tools that enhance agricultural practices. The app aims to bridge the gap between farmers and modern agricultural resources, enabling them to improve productivity and market access.",
-            color = MaterialTheme.colorScheme.primary,
+            color = MaterialTheme.colorScheme.onBackground,
         )
         Spacer(modifier = Modifier.height(10.dp))
         Column (modifier = Modifier.padding(10.dp)){
             Text(
                 text = "Technologies Used :",
-                color = MaterialTheme.colorScheme.secondary,
+                color = MaterialTheme.colorScheme.primary,
                 fontSize = 20.sp
             )
             Text(
                 text ="FrontEnd : Kotlin,JetPackCompose ,Material3",
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.onBackground,
 
                 )
             Text(
                 text ="BackEnd : Express, TypeScript",
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.onBackground,
 
                 )
             Text(
                 text ="DataBase : MongoDb",
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.onBackground,
 
                 )
         }

@@ -114,7 +114,7 @@ fun ProductsPageDes(product: Product,
             color = MaterialTheme.colorScheme.onSurface
         )
         Spacer(modifier = Modifier.height(10.dp))
-        IntegerRangeDropdown(initialText = "Choose Quantity", start =1 , end = product.stock, onItemSelected = onQuantityChange)
+        IntegerRangeDropdown(initialText = "Choose Quantity", start =1 , end = product.stock, initialValue = 1,onItemSelected = onQuantityChange)
 
         Spacer(modifier = Modifier.height(12.dp)) // Add spacing before buttons
 

@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.kisanconnect.features.Screens.About.presentation.AboutUI
+import com.example.kisanconnect.features.Screens.BuyNow.presentation.ui.BuyNowPage
 import com.example.kisanconnect.features.Screens.Cart.presentation.ui.CartPage
 import com.example.kisanconnect.features.Screens.Home.presentation.ui.HomeScreen
 import com.example.kisanconnect.features.Screens.Product.presentation.ui.ProductPage
@@ -37,5 +38,7 @@ fun NavHostGraph(navController: NavHostController,modifier: Modifier) {
         }
 
         composable("cart") { CartPage(modifier=modifier,navController) }
+
+        composable("buynow") { BuyNowPage(modifier = modifier) }
     }
 }
