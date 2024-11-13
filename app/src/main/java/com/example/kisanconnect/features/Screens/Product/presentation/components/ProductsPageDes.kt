@@ -30,7 +30,7 @@ import com.example.kisanconnect.ui.theme.KisanConnectTheme
 
 @Composable
 fun ProductsPageDes(product: Product,
-                    viewModel: ProductViewModel= hiltViewModel(),onQuantityChange:(Int)->Unit,onEditClick:(String)->Unit
+                    onQuantityChange:(Int)->Unit,onEditClick:(String)->Unit,onBuyNowClick:(String)->Unit
                     ) {
     Log.i("RevanthStock",product.stock.toString())
     Column(
@@ -133,7 +133,7 @@ fun ProductsPageDes(product: Product,
 
         // Buy Now button with light green background and white text
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { onBuyNowClick(product._id) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 10.dp),
@@ -172,6 +172,8 @@ fun ProductsPageDesPreview() {
             ),onQuantityChange = { quantity ->
                 println("Selected Quantity: $quantity")
             }, onEditClick = {
+
+            }, onBuyNowClick = {
 
             }
         )

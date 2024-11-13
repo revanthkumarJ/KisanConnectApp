@@ -39,6 +39,12 @@ fun NavHostGraph(navController: NavHostController,modifier: Modifier) {
 
         composable("cart") { CartPage(modifier=modifier,navController) }
 
-        composable("buynow") { BuyNowPage(modifier = modifier) }
+        composable("buynow/{productId}") {
+            backStackEntry->
+            var id=backStackEntry.arguments?.getString("productId")
+            if(id==null)
+                id=""
+            BuyNowPage(modifier = modifier,id)
+        }
     }
 }

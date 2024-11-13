@@ -85,7 +85,9 @@ fun ProductPage(productId: String, modifier: Modifier,navHostController: NavHost
                 Log.i("RevanthQuantity", it.toString())
             }, onEditClick = { id->
                 viewModel.addToCart(CartItemRequest(id,quantity))
-            } )
+            } , onBuyNowClick = {it->
+                navHostController.navigate("buynow/${it}")
+            })
         } else {
             // Handle error message if there is an issue
             errorMessage?.let {
