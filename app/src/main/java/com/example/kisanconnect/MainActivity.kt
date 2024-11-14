@@ -54,7 +54,9 @@ class MainActivity : ComponentActivity() {
                     NavigationItem("About", Icons.Filled.Info, Icons.Outlined.Info),
                     NavigationItem("Profile", Icons.Filled.Person, Icons.Outlined.Person),
                     NavigationItem(title="Cart",Icons.Filled.ShoppingCart,Icons.Outlined.ShoppingCart),
-                    NavigationItem(title="OnTheWay",Icons.Filled.Face,Icons.Outlined.Face)
+                    NavigationItem(title="OnTheWay",Icons.Filled.Face,Icons.Outlined.Face),
+                    NavigationItem(title="Delivered",Icons.Filled.Face,Icons.Outlined.Face)
+
                 )
 
                 val scope = rememberCoroutineScope()

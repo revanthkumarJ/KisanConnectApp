@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kisanconnect.features.Screens.OtherOrders.data.model.OnTheWayItem
+import com.example.kisanconnect.features.Screens.OtherOrders.data.model.OrderedItemX
 import com.example.kisanconnect.features.Screens.OtherOrders.data.repository.OtherProductsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,7 +17,8 @@ class OtherProductsViewModel @Inject constructor(
 
     var onTheWayItems = mutableStateOf<List<OnTheWayItem>>(emptyList())
         private set
-
+    var delivered = mutableStateOf<List<OrderedItemX>>(emptyList())
+        private set
 
 
     fun getOnTheWayItems() {
@@ -24,6 +26,18 @@ class OtherProductsViewModel @Inject constructor(
             try {
                 val response = repo.getAllOnTheWay(getAuthHeader())
                 onTheWayItems.value = response
+            } catch (e: Exception) {
+                // Handle exception (e.g., log it or update a UI state variable)
+            }
+        }
+    }
+
+
+    fun getDeliveredItems() {
+        viewModelScope.launch {
+            try {
+                val response = repo.getAllOrdered(getAuthHeader())
+                delivered.value = response
             } catch (e: Exception) {
                 // Handle exception (e.g., log it or update a UI state variable)
             }
