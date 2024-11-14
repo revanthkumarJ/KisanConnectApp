@@ -46,7 +46,7 @@ fun CartPageItem(item: cartItemUI, navController:NavHostController,viewModel: Ca
             navController.navigate("productPage/${item.productId}")
         },
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondaryContainer)
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surfaceContainer)
     ) {
         Column(
             modifier = Modifier

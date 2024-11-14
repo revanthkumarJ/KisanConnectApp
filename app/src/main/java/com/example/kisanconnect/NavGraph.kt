@@ -12,6 +12,7 @@ import com.example.kisanconnect.features.Screens.About.presentation.AboutUI
 import com.example.kisanconnect.features.Screens.BuyNow.presentation.ui.BuyNowPage
 import com.example.kisanconnect.features.Screens.Cart.presentation.ui.CartPage
 import com.example.kisanconnect.features.Screens.Home.presentation.ui.HomeScreen
+import com.example.kisanconnect.features.Screens.OtherOrders.presentation.ui.OnTheWayItemsPage
 import com.example.kisanconnect.features.Screens.Product.presentation.ui.ProductPage
 
 @Composable
@@ -46,5 +47,7 @@ fun NavHostGraph(navController: NavHostController,modifier: Modifier) {
                 id=""
             BuyNowPage(modifier = modifier,id)
         }
+
+        composable("ontheway") { OnTheWayItemsPage(modifier,navController) }
     }
 }
